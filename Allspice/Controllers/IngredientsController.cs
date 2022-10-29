@@ -28,4 +28,19 @@ public class IngredientsController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+  [HttpDelete("{ingredientId}")]
+  [Authorize]
+  public async Task<ActionResult<Ingredient>> DeleteIngredient(int ingredientId)
+  {
+    try
+    {
+      Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+      Ingredient ingredient = _is.DeleteIngredient(ingredientId, userInfo);
+      return Ok(ingredient);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 }

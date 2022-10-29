@@ -29,4 +29,10 @@ public class IngredientsService
   {
     return _repo.Get(recipeId);
   }
+
+  // ANCHOR this is where you left off
+  internal Ingredient DeleteIngredient(int ingredientId, Account userInfo)
+  {
+    throw new NotImplementedException();
+  }
 }
