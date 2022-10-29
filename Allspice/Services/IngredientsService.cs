@@ -13,7 +13,7 @@ public class IngredientsService
 
   internal Ingredient CreateIngredient(Ingredient ingredientData, Account userInfo)
   {
-    Recipe recipe = _recipesService.GetById(ingredientData.recipeId);
+    Recipe recipe = _recipesService.GetById(ingredientData.RecipeId);
     if (recipe == null)
     {
       throw new Exception("this recipe doesnt exist");
@@ -30,9 +30,8 @@ public class IngredientsService
     return _repo.Get(recipeId);
   }
 
-  // ANCHOR this is where you left off
-  internal Ingredient DeleteIngredient(int ingredientId, Account userInfo)
+  internal string DeleteIngredient(int ingredientId, Account userInfo)
   {
-    throw new NotImplementedException();
+    return _repo.Delete(ingredientId);
   }
 }

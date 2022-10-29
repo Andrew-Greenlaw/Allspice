@@ -1,8 +1,11 @@
+using Allspice.Interfaces;
 namespace Allspice.Models;
 
-public class Favorite : Recipe
+public class Favorite : IRepoItem<int>
 {
-  public int id { get; set; }
-  public string accountId { get; set; }
-  public int recipeId { get; set; }
+  public int Id { get; set; }
+  public string AccountId { get; set; }
+  public int RecipeId { get; set; }
+  public DateTime CreatedAt { get; set; }
+  public DateTime UpdatedAt { get; set; }
 }

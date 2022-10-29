@@ -35,7 +35,7 @@ public class IngredientsController : ControllerBase
     try
     {
       Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
-      Ingredient ingredient = _is.DeleteIngredient(ingredientId, userInfo);
+      string ingredient = _is.DeleteIngredient(ingredientId, userInfo);
       return Ok(ingredient);
     }
     catch (Exception e)

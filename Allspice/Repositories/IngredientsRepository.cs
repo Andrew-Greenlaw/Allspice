@@ -8,7 +8,7 @@ public class IngredientsRepository : BaseRepository
   {
     string sql = @"
     INSERT INTO ingredients(name,quantity,recipeId)
-    VALUES(@name,@Quantity,@RecipeId);
+    VALUES(@Name,@Quantity,@RecipeId);
     SELECT LAST_INSERT_ID()
     ;";
     int ingredientId = _db.ExecuteScalar<int>(sql, ingredientData);
@@ -25,12 +25,20 @@ public class IngredientsRepository : BaseRepository
     return _db.Query<Ingredient>(sql, new { ingredientId }).FirstOrDefault();
   }
 
-  internal List<Ingredient> Get(int recipeId)
+  internal List<Ingredient> Get(int RecipeId)
   {
     string sql = @"
     SELECT * FROM ingredients
-    WHERE recipeId = @recipeId
+    WHERE recipeId = @RecipeId
     ;";
-    return _db.Query<Ingredient>(sql, new { recipeId }).ToList();
+    return _db.Query<Ingredient>(sql, new { RecipeId }).ToList();
+  }
+  internal string Delete(int ingredientId)
+  {
+    string sql = @"
+    DELETE FROM ingredients WHERE Id = @ingredientId LIMIT 1
+    ;";
+    _db.Execute(sql, new { ingredientId });
+    return "You deleted this Ingredient";
   }
 }
