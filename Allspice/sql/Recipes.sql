@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS recipes(
   img VARCHAR(255) NOT NULL DEFAULT "https://images.unsplash.com/photo-1547516508-4c1f9c7c4ec3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
   category VARCHAR(255) NOT NULL,
   creatorId VARCHAR(255) NOT NULL,
-  FOREIGN KEY (creatorId) REFERENCES accounts(id)
+  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';

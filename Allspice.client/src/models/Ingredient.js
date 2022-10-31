@@ -1,9 +1,9 @@
-export class Account {
+export class Ingredient {
   constructor(data) {
     this.id = data.id
-    this.email = data.email
     this.name = data.name
-    this.picture = data.picture
+    this.quantity = data.quantity
+    this.recipeId = data.recipeId
     this.createdAt = data.createdAt
     this.updatedAt = data.updatedAt
   }

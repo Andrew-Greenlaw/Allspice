@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS favorites(
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   accountId VARCHAR(255) NOT NULL,
   recipeId INT NOT NULL,
-  FOREIGN KEY (accountId) REFERENCES accounts(id),
-  FOREIGN KEY (recipeId) REFERENCES recipes(id)
+  FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
+  FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
