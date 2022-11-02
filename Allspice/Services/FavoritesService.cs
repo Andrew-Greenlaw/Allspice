@@ -21,9 +21,9 @@ public class FavoritesService
     return _repo.Create(favoriteData);
   }
 
-  internal List<Favorite> GetAllFavorites(string accountId)
+  internal List<FavoritedRecipe> GetAllFavorites(string userId)
   {
-    return _repo.Get(accountId);
+    return _repo.Get(userId);
   }
 
   internal string DeleteFavorite(int favoriteId, Account userInfo)

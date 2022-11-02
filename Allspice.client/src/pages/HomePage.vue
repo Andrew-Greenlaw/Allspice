@@ -1,7 +1,9 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <RecipeCard v-for="r in recipes" :key="r.id" :recipe="r" />
+      <RecipeCard v-for="r in recipes" :key="r.id" :recipe="r" v-if="recipeFilter == null" />
+      <RecipeCard v-for="r in myRecipes" :key="r.id" :recipe="r" v-if="recipeFilter == 'Mine'" />
+      <RecipeCard v-for="r in favoritedRecipes" :key="r.id" :recipe="r" />
     </div>
   </div>
 </template>
@@ -13,6 +15,8 @@ import { AppState } from '../AppState.js';
 import { recipesService } from '../services/RecipesService.js';
 import RecipeCard from '../components/RecipeCard.vue';
 import Pop from '../utils/Pop.js';
+import { favoritesService } from '../services/FavoritesService.js';
+import { accountService } from '../services/AccountService.js';
 
 export default {
   setup() {
@@ -23,11 +27,29 @@ export default {
         Pop.error('[GetRecipes]', error)
       }
     }
+    async function getFavorites() {
+      try {
+        await accountService.getFavorites()
+      } catch (error) {
+        Pop.error('[GetFavorites]', error)
+      }
+    }
     onMounted(() => {
       getRecipes()
     })
     return {
-      recipes: computed(() => AppState.recipes)
+      recipes: computed(() => AppState.recipes),
+      favorites: computed(() => AppState.favorites),
+      myRecipes: computed(() => AppState.recipes.filter(r => r.creatorId == account.id)),
+      favoritedRecipes: computed(() => AppState.recipes.filter(r => {
+        for (let f of Appstate.favorites) {
+          if (f.recipeId == r.id) {
+            return true;
+          }
+        }
+      })),
+      account: computed(() => AppState.account),
+      recipeFilter: computed(() => AppState.recipeFilter)
     }
   }
 }

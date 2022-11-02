@@ -25,13 +25,23 @@ public class FavoritesRepository : BaseRepository
     return _db.Query<Favorite>(sql, new { Id }).FirstOrDefault();
   }
 
-  internal List<Favorite> Get(string AccountId)
+  internal List<FavoritedRecipe> Get(string userId)
   {
     string sql = @"
-    SELECT * FROM favorites f
-    WHERE f.accountId = @AccountId
+    SELECT 
+    a.*,
+    r.*, 
+    f.id AS FavoriteId
+    FROM favorites f
+    JOIN recipes r ON r.id = f.recipeId
+    JOIN accounts a ON a.id = r.creatorId
+    WHERE f.accountId = @userId
     ;";
-    return _db.Query<Favorite>(sql, new { AccountId }).ToList();
+    return _db.Query<Account, FavoritedRecipe, FavoritedRecipe>(sql, (account, recipe) =>
+    {
+      recipe.Creator = account;
+      return recipe;
+    }, new { userId }).ToList();
   }
 
   internal string Delete(int FavoriteId)

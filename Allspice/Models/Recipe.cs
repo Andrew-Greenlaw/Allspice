@@ -14,3 +14,7 @@ public class Recipe : IRepoItem<int>
   public string CreatorId { get; set; }
   public Profile Creator { get; set; }
 }
+public class FavoritedRecipe : Recipe
+{
+  public int FavoriteId { get; set; }
+}
