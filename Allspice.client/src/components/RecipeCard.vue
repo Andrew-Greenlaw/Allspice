@@ -1,12 +1,16 @@
 <template>
   <div class="col-md-4 p-5">
-    <div class="recipe-card rounded elevation-5" :style="{ backgroundImage: `url(${recipe.img}` }">
+    <div class="recipe-card rounded elevation-5 selectable" onclick="setActiveRecipe(recipe.id)"
+      :style="{ backgroundImage: `url(${recipe.img}` }" data-bs-toggle="modal" data-bs-target="#recipeDetail">
       <div class="text p-3 d-flex justify-content-between flex-column">
         <div class="d-flex justify-content-between">
           <div class="background-tag text-light p-2">
             <h5 class="m-0">{{ recipe.category }}</h5>
           </div>
-          <div class="background-tag p-2">
+          <div class="background-tag p-2" v-if="isFavorite">
+            <i class="mdi mdi-heart text-danger"></i>
+          </div>
+          <div class="background-tag p-2" v-else>
             <i class="mdi mdi-heart-outline"></i>
           </div>
         </div>
@@ -20,7 +24,11 @@
 
 
 <script>
+import { computed } from '@vue/reactivity';
+import { AppState } from '../AppState.js';
 import { Recipe } from '../models/Recipe.js';
+import { recipesService } from '../services/RecipesService.js';
+import Pop from '../utils/Pop.js';
 export default {
   props: {
     recipe: {
@@ -28,8 +36,18 @@ export default {
       required: true
     }
   },
-  setup() {
-    return {}
+  setup(props) {
+    return {
+      favoritedRecipe: computed(() => AppState.favoritedRecipe),
+      isFavorite: computed(() => AppState.favoritedRecipes.find(f => f.id == props.recipe.id)),
+      async setActiveRecipe(id) {
+        try {
+          await recipesService.setActiveRecipe(id)
+        } catch (error) {
+          Pop.error('[setactiveRecipe]', error)
+        }
+      }
+    }
   }
 }
 </script>

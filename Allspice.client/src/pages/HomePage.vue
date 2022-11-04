@@ -1,9 +1,24 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <RecipeCard v-for="r in recipes" :key="r.id" :recipe="r" v-if="recipeFilter == null" />
-      <RecipeCard v-for="r in myRecipes" :key="r.id" :recipe="r" v-if="recipeFilter == 'Mine'" />
-      <RecipeCard v-for="r in favoritedRecipes" :key="r.id" :recipe="r" />
+      <RecipeCard v-for="r in recipes" :key="r.id" :recipe="r" />
+    </div>
+  </div>
+  <div class="modal fade" id="recipeDetail" tabindex="-1" aria-labelledby="recipeDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="recipeDetailLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <DetailsComponent />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,17 +54,9 @@ export default {
     })
     return {
       recipes: computed(() => AppState.recipes),
-      favorites: computed(() => AppState.favorites),
+      favoritedRecipes: computed(() => AppState.favoritedRecipes),
       myRecipes: computed(() => AppState.recipes.filter(r => r.creatorId == account.id)),
-      favoritedRecipes: computed(() => AppState.recipes.filter(r => {
-        for (let f of Appstate.favorites) {
-          if (f.recipeId == r.id) {
-            return true;
-          }
-        }
-      })),
       account: computed(() => AppState.account),
-      recipeFilter: computed(() => AppState.recipeFilter)
     }
   }
 }

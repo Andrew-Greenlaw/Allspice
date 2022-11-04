@@ -22,12 +22,9 @@ public class RecipesRepository : BaseRepository
     string sql = @"
     SELECT
     r.*,
-    COUNT(f.id) AS FavoritesCount,
     a.*
     FROM recipes r
     JOIN accounts a ON a.id = r.creatorId
-    LEFT JOIN favorites f ON f.recipeId = r.id
-    GROUP BY r.id
 ;";
     return _db.Query<Recipe, Profile, Recipe>(sql, (recipe, profile) =>
     {

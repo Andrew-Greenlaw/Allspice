@@ -6,8 +6,9 @@
     <router-view />
   </main>
   <footer>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Launch demo modal
+    <button type="button" class="btn btn-primary d-flex justify-content-center align-items-center"
+      data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="mdi mdi-plus fs-1"></i>
     </button>
 
   </footer>
@@ -62,5 +63,11 @@ footer {
   bottom: 0;
   left: 0;
   z-index: 1030;
+
+  .btn {
+    border-radius: 50% !important;
+    height: 4rem;
+    width: 4rem;
+  }
 }
 </style>

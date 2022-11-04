@@ -13,6 +13,7 @@ public class Recipe : IRepoItem<int>
   public DateTime UpdatedAt { get; set; }
   public string CreatorId { get; set; }
   public Profile Creator { get; set; }
+
 }
 public class FavoritedRecipe : Recipe
 {
