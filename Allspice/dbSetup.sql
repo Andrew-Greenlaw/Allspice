@@ -1,4 +1,4 @@
--- Active: 1666715478973@@SG-mirror-push-8951-6845-mysql-master.servers.mongodirector.com@3306
+-- Active: 1670981605080@@localhost@3306@local_schema
 CREATE TABLE IF NOT EXISTS accounts(
   id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',

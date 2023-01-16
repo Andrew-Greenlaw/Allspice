@@ -1,4 +1,4 @@
--- Active: 1666715478973@@SG-mirror-push-8951-6845-mysql-master.servers.mongodirector.com@3306@garbageCollector
+-- Active: 1670981605080@@localhost@3306@local_schema
 CREATE TABLE IF NOT EXISTS favorites(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
