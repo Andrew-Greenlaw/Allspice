@@ -17,18 +17,21 @@ public class RecipesRepository : BaseRepository
     return recipe;
   }
 
-  internal List<Recipe> Get()
+  internal List<FavoritedRecipe> Get()
   {
     string sql = @"
     SELECT
     r.*,
+
     a.*
     FROM recipes r
     JOIN accounts a ON a.id = r.creatorId
+    LEFT JOIN favorites f ON f.recipeId = r.id
 ;";
-    return _db.Query<Recipe, Profile, Recipe>(sql, (recipe, profile) =>
+    return _db.Query<FavoritedRecipe, Profile, FavoritedRecipe>(sql, (recipe, profile) =>
     {
       recipe.Creator = profile;
+      // favorite id = f.if
       return recipe;
     }
     ).ToList();
