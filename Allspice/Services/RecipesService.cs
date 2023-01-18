@@ -14,7 +14,7 @@ public class RecipesService
     return _repo.CreateRecipe(newRecipe);
   }
 
-  internal List<FavoritedRecipe> GetAllRecipes()
+  internal List<Recipe> GetAllRecipes()
   {
     return _repo.Get();
   }

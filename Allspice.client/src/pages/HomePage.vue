@@ -32,6 +32,7 @@ import RecipeCard from '../components/RecipeCard.vue';
 import Pop from '../utils/Pop.js';
 import { favoritesService } from '../services/FavoritesService.js';
 import { accountService } from '../services/AccountService.js';
+import { onAuthLoaded } from '@bcwdev/auth0provider-client';
 
 export default {
   setup() {
@@ -52,6 +53,9 @@ export default {
     onMounted(() => {
       getRecipes()
     })
+    // onAuthLoaded(() => {
+    //   getFavorites()
+    // })
     return {
       recipes: computed(() => AppState.recipes),
       favoritedRecipes: computed(() => AppState.favoritedRecipes),

@@ -31,11 +31,11 @@ public class RecipesController : ControllerBase
     }
   }
   [HttpGet]
-  public ActionResult<List<FavoritedRecipe>> GetAllRecipes()
+  public ActionResult<List<Recipe>> GetAllRecipes()
   {
     try
     {
-      List<FavoritedRecipe> recipes = _rs.GetAllRecipes();
+      List<Recipe> recipes = _rs.GetAllRecipes();
       return Ok(recipes);
     }
     catch (Exception e)
