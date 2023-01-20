@@ -21,8 +21,8 @@
       </div>
       <div class="col-12 d-flex justify-content-center">
         <div class="button-component bg-light p-2 rounded elevation-5">
-          <button @click="Appstate.recipeFilter = null" class="btn pe-3">Home</button>
-          <button @click="Appstate.recipeFilter = 'Mine'" class="btn mx-4">My Recipes</button>
+          <button @click="getAllRecipes()" class="btn pe-3">Home</button>
+          <button @click="getMyRecipes()" class="btn mx-4">My Recipes</button>
           <button @click="getFavorites()" class="btn pe-3">Favorites</button>
         </div>
       </div>
@@ -45,7 +45,21 @@ export default {
         try {
           await accountService.getFavorites()
         } catch (error) {
-          Pop.error('[getfavorites]')
+          Pop.error('[getfavorites]', error)
+        }
+      },
+      async getAllRecies() {
+        try {
+          await recipesService.getRecipes()
+        } catch (error) {
+          Pop.error('get all recipes', error)
+        }
+      },
+      async getMyRecipes() {
+        try {
+          await accountService.getMyRecipes()
+        } catch (error) {
+          Pop.error('[GetMyRecipes]', error)
         }
       }
     }
