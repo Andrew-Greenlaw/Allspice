@@ -43,15 +43,9 @@ export default {
         Pop.error('[GetRecipes]', error)
       }
     }
-    async function getFavorites() {
-      try {
-        await accountService.getFavorites()
-      } catch (error) {
-        Pop.error('[GetFavorites]', error)
-      }
-    }
     onMounted(() => {
       getRecipes()
+
     })
     // onAuthLoaded(() => {
     //   getFavorites()

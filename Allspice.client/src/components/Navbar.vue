@@ -21,9 +21,15 @@
       </div>
       <div class="col-12 d-flex justify-content-center">
         <div class="button-component bg-light p-2 rounded elevation-5">
-          <button @click="getAllRecipes()" class="btn pe-3">Home</button>
-          <button @click="getMyRecipes()" class="btn mx-4">My Recipes</button>
-          <button @click="getFavorites()" class="btn pe-3">Favorites</button>
+          <router-link :to="{ name: 'Home' }">
+            <button class="btn pe-3">Home</button>
+          </router-link>
+          <router-link :to="{ name: 'MyRecipes' }">
+            <button class="btn mx-4">My Recipes</button>
+          </router-link>
+          <router-link :to="{ name: 'Favorites' }">
+            <button class="btn pe-3">Favorites</button>
+          </router-link>
         </div>
       </div>
     </div>
