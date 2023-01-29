@@ -47,9 +47,6 @@ export default {
       getRecipes()
 
     })
-    // onAuthLoaded(() => {
-    //   getFavorites()
-    // })
     return {
       recipes: computed(() => AppState.recipes),
       favoritedRecipes: computed(() => AppState.favoritedRecipes),

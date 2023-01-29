@@ -25,10 +25,20 @@ class AccountService {
     AppState.favoritedRecipes = res.data.map(f => new FavoritedRecipe(f))
     console.log(AppState.favoritedRecipes)
   }
-  async getMyRecipes() {
+  async getMyFavorites() {
+    const res = await api.get('account/favorites')
+    console.log('favorites', res.data)
+    AppState.recipes = res.data.map(f => new FavoritedRecipe(f))
+  }
+  async getCreatedRecipes() {
     const res = await api.get('account/recipes')
     console.log(res.data)
     AppState.myRecipes = res.data.map(r => new Recipe(r))
+  }
+  async getMyRecipes() {
+    const res = await api.get('account/recipes')
+    console.log('myrecipes', res.data)
+    AppState.recipes = res.data.map(r => new Recipe(r))
   }
 }
 
