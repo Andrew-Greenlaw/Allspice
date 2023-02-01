@@ -9,5 +9,10 @@ class RecipesService {
     console.log(res.data)
     AppState.recipes = res.data.map(r => new Recipe(r))
   }
+  async setActiveRecipe(id) {
+    const recipe = AppState.recipes.find({ id })
+    console.log(recipe, 'what does this look like?')
+    AppState.activeRecipe = recipe
+  }
 }
 export const recipesService = new RecipesService()
