@@ -43,6 +43,7 @@ import { accountService } from '../services/AccountService.js';
 import { recipesService } from '../services/RecipesService.js';
 import Pop from '../utils/Pop.js';
 import Login from './Login.vue'
+import { AuthService } from '../services/AuthService.js';
 export default {
   setup() {
     return {
@@ -63,6 +64,9 @@ export default {
       },
       async getMyRecipes() {
         try {
+          if (!AppState.account.id) {
+            return AuthService.loginWithRedirect()
+          }
           await accountService.getMyRecipes()
         } catch (error) {
           Pop.error('[GetMyRecipes]', error)
